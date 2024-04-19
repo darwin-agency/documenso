@@ -99,6 +99,12 @@ COPY --from=installer --chown=nextjs:nodejs /app/packages/prisma/migrations ./pa
 COPY --from=installer --chown=nextjs:nodejs /app/node_modules/prisma/ ./node_modules/prisma/
 COPY --from=installer --chown=nextjs:nodejs /app/node_modules/@prisma/ ./node_modules/@prisma/
 
+# Playwright needs to be installed in the runner container
+RUN npx playwright install --with-deps
+COPY --from=installer --chown=nextjs:nodejs /app/node_modules/playwright/ ./node_modules/playwright/
+COPY --from=installer --chown=nextjs:nodejs /app/node_modules/playwright-core/ ./node_modules/playwright-core/
+
+
 # Symlink the prisma binary
 RUN mkdir node_modules/.bin
 RUN ln -s /app/node_modules/prisma/build/index.js ./node_modules/.bin/prisma

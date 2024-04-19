@@ -3,6 +3,5 @@
 set -x
 
 npx prisma migrate deploy --schema ./packages/prisma/schema.prisma
-npm install -D @playwright/test@latest
-npx playwright install --with-deps
+npx playwright install
 node apps/web/server.js
