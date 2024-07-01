@@ -64,6 +64,6 @@ export const sendConfirmationToken = async ({
 
     return { success: true };
   } catch (err) {
-    throw new Error(`Failed to send the confirmation email`);
+    throw new Error(`Failed to send the confirmation email`, err as Error);
   }
 };
